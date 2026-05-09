@@ -2,15 +2,15 @@
  * Created by joelsaxton on 11/10/14.
  */
 
-var Alien = function(){
+StarPatrol.Alien = function(){
     this.hasBullets = false;
     this.hasDrill = false;
 };
 
-Alien.prototype = Object.create(Phaser.Sprite.prototype);
-Alien.prototype.constructor = Alien;
+StarPatrol.Alien.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Alien.prototype.constructor = StarPatrol.Alien;
 
-Alien.prototype.onRevived = function() {
+StarPatrol.Alien.prototype.onRevived = function() {
     this.charge = this.MAXCHARGE;
     this.health = this.MAXHEALTH;
     this.alive = true;
@@ -18,7 +18,7 @@ Alien.prototype.onRevived = function() {
     this.isSlowing = false;
 };
 
-Alien.prototype.avoidObstacle = function() {
+StarPatrol.Alien.prototype.avoidObstacle = function() {
     this.isAttacking = false;
     if (this.hasTractorBeam) {
         this.isTractorBeamOn = false;
@@ -39,9 +39,9 @@ Alien.prototype.avoidObstacle = function() {
     }
 };
 
-Alien.prototype.createBullet = function (x, y) {
+StarPatrol.Alien.prototype.createBullet = function (x, y) {
 
-    var bullet = new Bullet(this.game, this.key, x, y);
+    var bullet = new StarPatrol.Bullet(this.game, this.key, x, y);
     this.bullets.add(bullet);
 
     bullet.reset(this.x, this.y);
@@ -49,7 +49,7 @@ Alien.prototype.createBullet = function (x, y) {
 };
 
 
-Alien.prototype.die = function () {
+StarPatrol.Alien.prototype.die = function () {
     if (this.hasTractorBeam) {
         this.isTractorBeamOn = false;
         this.tractorBeamSound.stop();
@@ -63,7 +63,7 @@ Alien.prototype.die = function () {
     this.alive = false;
 };
 
-Alien.prototype.updateWeapons = function() {
+StarPatrol.Alien.prototype.updateWeapons = function() {
 
     // Heat seeking bullet
     if (this.hasBullets && this.alive) {
@@ -72,10 +72,10 @@ Alien.prototype.updateWeapons = function() {
                 if (this.game.physics.arcade.distanceBetween(bullet, this.target) > this.BULLETLOCKDISTANCE) {
                     this.game.physics.arcade.accelerateToObject(bullet, this.target, this.BULLETACCELERATION, this.MAXBULLETSPEED, this.MAXBULLETSPEED);
                 } else {
-                    this.game.physics.arcade.moveToObject(bullet, this.target, parseInt(this.target.body.speed) * 10);
+                    this.game.physics.arcade.moveToObject(bullet, this.target, parseInt(this.target.body.speed, 10) * 10);
                 }
                 if (bullet.lifespan < this.game.time.now) {
-                    if (bullet.key = 'ufo-bullet') {
+                    if (bullet.key === 'ufo-bullet') {
                         bullet.kill();
 
                     } else {

@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/10/14.
  */
 
-var Asteroid = function(game, scale, x, y, direction, key, frame){
+StarPatrol.Asteroid = function(game, scale, x, y, direction, key, frame){
     key = 'asteroid';
     Phaser.Sprite.call(this, game, x, y, key, frame);
     this.scale.setTo(this.game.rnd.realInRange(0.2, 2) * scale);
@@ -19,10 +19,10 @@ var Asteroid = function(game, scale, x, y, direction, key, frame){
     this.damage = 5;
 };
 
-Asteroid.prototype = Object.create(Phaser.Sprite.prototype);
-Asteroid.prototype.constructor = Asteroid;
+StarPatrol.Asteroid.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Asteroid.prototype.constructor = StarPatrol.Asteroid;
 
-Asteroid.prototype.onRevived = function() {
+StarPatrol.Asteroid.prototype.onRevived = function() {
     switch (this.direction) {
         case 1:
             this.body.velocity.x = this.game.rnd.integerInRange(-this.maxUpperVel,-this.maxLowerVel);

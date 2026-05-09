@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/10/14.
  */
 
-var Magnet = function(main, player, scale, x, y, key, frame){
+StarPatrol.Magnet = function(main, player, scale, x, y, key, frame){
     key = 'magnet';
     Phaser.Sprite.call(this, main.game, x, y, key, frame);
 
@@ -59,15 +59,15 @@ var Magnet = function(main, player, scale, x, y, key, frame){
 
 };
 
-Magnet.prototype = Object.create(Phaser.Sprite.prototype);
-Magnet.prototype.constructor = Magnet;
-Magnet.prototype.avoidObstacle = Alien.prototype.avoidObstacle;
-Magnet.prototype.die = Alien.prototype.die;
-Magnet.prototype.createBullet = Alien.prototype.createBullet;
-Magnet.prototype.onRevived = Alien.prototype.onRevived;
-Magnet.prototype.updateWeapons = Alien.prototype.updateWeapons;
+StarPatrol.Magnet.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Magnet.prototype.constructor = StarPatrol.Magnet;
+StarPatrol.Magnet.prototype.avoidObstacle = StarPatrol.Alien.prototype.avoidObstacle;
+StarPatrol.Magnet.prototype.die = StarPatrol.Alien.prototype.die;
+StarPatrol.Magnet.prototype.createBullet = StarPatrol.Alien.prototype.createBullet;
+StarPatrol.Magnet.prototype.onRevived = StarPatrol.Alien.prototype.onRevived;
+StarPatrol.Magnet.prototype.updateWeapons = StarPatrol.Alien.prototype.updateWeapons;
 
-Magnet.prototype.update = function() {
+StarPatrol.Magnet.prototype.update = function() {
     var targetAngle = this.game.math.angleBetween(
         this.x, this.y,
         this.target.x, this.target.y
@@ -172,4 +172,3 @@ Magnet.prototype.update = function() {
         this.wasHit = false;
     }
 };
-

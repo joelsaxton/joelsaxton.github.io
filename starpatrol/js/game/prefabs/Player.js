@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/10/14.
  */
 
-var Player = function(main, x, y, frame){
+StarPatrol.Player = function(main, x, y, frame){
 
     this.main = main;
     this.playerScale = main.GAME_SCALE;
@@ -48,7 +48,7 @@ var Player = function(main, x, y, frame){
     this.WARPVELOCITY = this.VELOCITY * 10;
     this.RELOAD_INTERVAL = 500;
     this.RECHARGE_INTERVAL = 50;
-    this.WARP_INTERVAL = 1000; // @todo fix later
+    this.WARP_INTERVAL = 1000;
     this.LASER_DISCHARGE = 34;
     this.shieldStrength = this.CHARGE;
     this.warpDrive = this.CHARGE;
@@ -71,7 +71,7 @@ var Player = function(main, x, y, frame){
     this.aliensKilled = 0;
     this.cash = 3000;
     this.inGravitationalField = false;
-    this.SLINGSHOT_SLOW_RATE = 0.99; // @todo revisit slowdown
+    this.SLINGSHOT_SLOW_RATE = 0.99;
 
     // Upgrades
     this.engineCost = this.ENGINE * 1000;
@@ -89,7 +89,7 @@ var Player = function(main, x, y, frame){
     this.missilegroup.setAll('anchor.y', 0.5);
 
     // Set player map
-    this.map = this.game.add.sprite(this.game.width - this.game.mapSize - this.game.mapOffset + parseInt(this.x * this.game.mapGameRatio), parseInt(this.y * this.game.mapGameRatio) + this.game.mapOffset, 'playermap');
+    this.map = this.game.add.sprite(this.game.width - this.game.mapSize - this.game.mapOffset + parseInt(this.x * this.game.mapGameRatio, 10), parseInt(this.y * this.game.mapGameRatio, 10) + this.game.mapOffset, 'playermap');
     this.map.fixedToCamera = true;
     this.map.anchor.setTo(0.5);
     this.map.scale.setTo(3);
@@ -111,10 +111,10 @@ var Player = function(main, x, y, frame){
     this.nukeSound = this.game.add.audio('nuke');
 };
 
-Player.prototype = Object.create(Phaser.Sprite.prototype);
-Player.prototype.constructor = Player;
+StarPatrol.Player.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Player.prototype.constructor = StarPatrol.Player;
 
-Player.prototype.fireWeapon = function() {
+StarPatrol.Player.prototype.fireWeapon = function() {
     switch (this.selectedWeapon) {
         case 'laser':
             this.fireLaser();
@@ -128,7 +128,7 @@ Player.prototype.fireWeapon = function() {
     }
 };
 
-Player.prototype.fireMissile = function () {
+StarPatrol.Player.prototype.fireMissile = function () {
     if (this.isReloaded && this.missiles > 0) {
         this.missiles--;
         this.missileSound.play('', 0, 0.4, false, true);
@@ -137,7 +137,7 @@ Player.prototype.fireMissile = function () {
     }
 };
 
-Player.prototype.fireLaser = function () {
+StarPatrol.Player.prototype.fireLaser = function () {
     if (this.isReloaded && this.charge >= this.LASER_DISCHARGE) {
         this.charge -= this.LASER_DISCHARGE;
         this.laserSound.play('', 0, 0.4, false, true);
@@ -146,7 +146,7 @@ Player.prototype.fireLaser = function () {
     }
 };
 
-Player.prototype.fireNuke = function () {
+StarPatrol.Player.prototype.fireNuke = function () {
     if (this.isReloaded && this.nukes > 0) {
         this.nukes--;
         this.nukeSound.play('', 0, 0.6, false, true);
@@ -155,15 +155,15 @@ Player.prototype.fireNuke = function () {
     }
 };
 
-Player.prototype.createLaser = function(x, y, angle) {
-    var laser = new Laser(this.game, this.LASERSCALE, x, y, angle);
+StarPatrol.Player.prototype.createLaser = function(x, y, angle) {
+    var laser = new StarPatrol.Laser(this.game, this.LASERSCALE, x, y, angle);
     this.lasers.add(laser);
     laser.reset(this.x, this.y);
     laser.revive();
 };
 
-Player.prototype.createMissile = function(x, y, angle) {
-    var missile = new Missile(false, this.game, this.MISSILESCALE, x, y, angle);
+StarPatrol.Player.prototype.createMissile = function(x, y, angle) {
+    var missile = new StarPatrol.Missile(false, this.game, this.MISSILESCALE, x, y, angle);
     missile.animations.add('missile-launch', [0,1,0,1,0,1,2,1,2,3,2,3,4,5,4,5]);
     missile.animations.add('missile-cruise', [6,7,6]);
     this.missilegroup.add(missile);
@@ -173,8 +173,8 @@ Player.prototype.createMissile = function(x, y, angle) {
     missile.animations.play('missile-launch', 8, true);
 };
 
-Player.prototype.createNuke = function(x, y, angle) {
-    var nuke = new Missile(true, this.game, this.NUKESCALE, x, y, angle);
+StarPatrol.Player.prototype.createNuke = function(x, y, angle) {
+    var nuke = new StarPatrol.Missile(true, this.game, this.NUKESCALE, x, y, angle);
     nuke.animations.add('missile-launch', [0,1,0,1,0,1,2,1,2,3,2,3,4,5,4,5]);
     nuke.animations.add('missile-cruise', [6,7,6]);
     this.missilegroup.add(nuke);
@@ -184,7 +184,7 @@ Player.prototype.createNuke = function(x, y, angle) {
     nuke.animations.play('missile-launch', 8, true);
 };
 
-Player.prototype.upgradeShip = function(part) {
+StarPatrol.Player.prototype.upgradeShip = function(part) {
     switch (part) {
         case 'engine':
             if (this.cash >= this.engineCost && this.ENGINE < this.MAXENGINE) {
@@ -194,7 +194,7 @@ Player.prototype.upgradeShip = function(part) {
                 this.TURNRATE += this.TURNRATE_INCREMENT;
                 this.VELOCITY += this.VELOCITY_INCREMENT;
                 this.SLINGSHOT_VELOCITY = this.VELOCITY * this.SLINGSHOT_MULTIPLIER;
-                this.engineCost = Math.floor(this.engineCost * this.ENGINE_COST_MULTIPLIER); // @todo revisit
+                this.engineCost = Math.floor(this.engineCost * this.ENGINE_COST_MULTIPLIER);
             }
             break;
         case 'charge':
@@ -245,7 +245,7 @@ Player.prototype.upgradeShip = function(part) {
     }
 };
 
-Player.prototype.updateWeapons = function() {
+StarPatrol.Player.prototype.updateWeapons = function() {
 
     this.lasers.forEach(function (laser) {
         if (laser) {
@@ -257,10 +257,6 @@ Player.prototype.updateWeapons = function() {
 
     this.missilegroup.forEach(function (missile) {
         if (missile) {
-            // Calculate the angle from the missile to the mouse cursor game.input.x
-            // and game.input.y are the mouse position; substitute with whatever
-            // target coordinates you need.
-
             var targetAngle = 0;
 
             if (this.main.alien && !this.main.alien.isInvisible) {
@@ -269,7 +265,6 @@ Player.prototype.updateWeapons = function() {
                     this.main.alien.x, this.main.alien.y
                 );
             }
-
 
             // Add wobble effect
             targetAngle += this.game.math.degToRad(missile.wobble);

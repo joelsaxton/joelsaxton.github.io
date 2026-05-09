@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/10/14.
  */
 
-var Flameship = function (main, player, scale, x, y, key, frame) {
+StarPatrol.Flameship = function (main, player, scale, x, y, key, frame) {
     key = 'flameship';
 
     Phaser.Sprite.call(this, main.game, x, y, key, frame);
@@ -80,14 +80,13 @@ var Flameship = function (main, player, scale, x, y, key, frame) {
 
 };
 
-Flameship.prototype = Object.create(Phaser.Sprite.prototype);
-Flameship.prototype.constructor = Flameship;
-Flameship.prototype.avoidObstacle = Alien.prototype.avoidObstacle;
-Flameship.prototype.die = Alien.prototype.die;
-Flameship.prototype.onRevived = Alien.prototype.onRevived;
-Flameship.prototype.updateWeapons = Alien.prototype.updateWeapons;
+StarPatrol.Flameship.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Flameship.prototype.constructor = StarPatrol.Flameship;
+StarPatrol.Flameship.prototype.avoidObstacle = StarPatrol.Alien.prototype.avoidObstacle;
+StarPatrol.Flameship.prototype.onRevived = StarPatrol.Alien.prototype.onRevived;
+StarPatrol.Flameship.prototype.updateWeapons = StarPatrol.Alien.prototype.updateWeapons;
 
-Flameship.prototype.update = function () {
+StarPatrol.Flameship.prototype.update = function () {
 
     this.smokeEmitter.x = this.x;
     this.smokeEmitter.y = this.y;
@@ -173,7 +172,7 @@ Flameship.prototype.update = function () {
     }
 };
 
-Flameship.prototype.getRetreatTarget = function () {
+StarPatrol.Flameship.prototype.getRetreatTarget = function () {
     var x = this.player.x;
     var y = this.player.y;
     var x_vel = this.player.body.velocity.x;
@@ -191,7 +190,7 @@ Flameship.prototype.getRetreatTarget = function () {
     if (this.retreatTarget.y > this.GAMESIZE) this.retreatTarget.y = this.GAMESIZE;
 };
 
-Flameship.prototype.getFlameTarget = function () {
+StarPatrol.Flameship.prototype.getFlameTarget = function () {
     var x = this.player.x;
     var y = this.player.y;
     var x_vel = this.player.body.velocity.x;
@@ -208,10 +207,9 @@ Flameship.prototype.getFlameTarget = function () {
     if (this.flameTarget.y > this.GAMESIZE) this.flameTarget.y = this.GAMESIZE;
 };
 
-Flameship.prototype.die = function () {
+StarPatrol.Flameship.prototype.die = function () {
     this.alive = false;
     this.flameSound.stop();
     this.burningSound.stop();
     this.smokeEmitter.on = false;
 };
-

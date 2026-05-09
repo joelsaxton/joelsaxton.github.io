@@ -1,14 +1,14 @@
 /**
  * Created by joelsaxton on 11/8/14.
  */
-var Scoreboard = function(game){
+StarPatrol.Scoreboard = function(game){
     Phaser.Group.call(this, game);
 }
 
-Scoreboard.prototype = Object.create(Phaser.Group.prototype);
-Scoreboard.prototype.constructor = Scoreboard;
+StarPatrol.Scoreboard.prototype = Object.create(Phaser.Group.prototype);
+StarPatrol.Scoreboard.prototype.constructor = StarPatrol.Scoreboard;
 
-Scoreboard.prototype.show = function(score, gameOverSound, explosionSound, victory){
+StarPatrol.Scoreboard.prototype.show = function(score, gameOverSound, explosionSound, victory){
     var bmd, background, scoreText, highScoreText, newHighScoreText, startText;
     bmd = this.game.add.bitmapData(this.game.width, this.game.height);
     bmd.ctx.fillStyle = '#000';
@@ -68,6 +68,6 @@ Scoreboard.prototype.show = function(score, gameOverSound, explosionSound, victo
     this.game.input.onDown.addOnce(this.restart, this);
 };
 
-Scoreboard.prototype.restart = function(){
+StarPatrol.Scoreboard.prototype.restart = function(){
     this.game.state.start('Game', true, false);
 };

@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/9/14.
  */
 
-var Missile = function(isNuke, game, missileScale, x, y, angle, key, frame){
+StarPatrol.Missile = function(isNuke, game, missileScale, x, y, angle, key, frame){
     key = 'missile';
     Phaser.Sprite.call(this, game, x, y, key, frame);
 
@@ -33,10 +33,10 @@ var Missile = function(isNuke, game, missileScale, x, y, angle, key, frame){
     );
 };
 
-Missile.prototype = Object.create(Phaser.Sprite.prototype);
-Missile.prototype.constructor = Missile;
+StarPatrol.Missile.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Missile.prototype.constructor = StarPatrol.Missile;
 
-Missile.prototype.onRevived = function() {
+StarPatrol.Missile.prototype.onRevived = function() {
     this.lifespan = this.game.time.now + this.missileLifeSpan;
     this.launchtime = this.game.time.now + this.missileLaunchTime;
     this.speed = 0;

@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/10/14.
  */
 
-var Ufo = function (main, player, scale, x, y, key, frame) {
+StarPatrol.Ufo = function (main, player, scale, x, y, key, frame) {
     key = 'ufo';
 
     Phaser.Sprite.call(this, main.game, x, y, key, frame);
@@ -70,15 +70,14 @@ var Ufo = function (main, player, scale, x, y, key, frame) {
     this.deathRaySound = this.game.add.audio('deathRay');
 };
 
-Ufo.prototype = Object.create(Phaser.Sprite.prototype);
-Ufo.prototype.constructor = Ufo;
-Ufo.prototype.avoidObstacle = Alien.prototype.avoidObstacle;
-Ufo.prototype.die = Alien.prototype.die;
-Ufo.prototype.onRevived = Alien.prototype.onRevived;
-Ufo.prototype.createBullet = Alien.prototype.createBullet;
-Ufo.prototype.die = Alien.prototype.die;
+StarPatrol.Ufo.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Ufo.prototype.constructor = StarPatrol.Ufo;
+StarPatrol.Ufo.prototype.avoidObstacle = StarPatrol.Alien.prototype.avoidObstacle;
+StarPatrol.Ufo.prototype.die = StarPatrol.Alien.prototype.die;
+StarPatrol.Ufo.prototype.onRevived = StarPatrol.Alien.prototype.onRevived;
+StarPatrol.Ufo.prototype.createBullet = StarPatrol.Alien.prototype.createBullet;
 
-Ufo.prototype.update = function () {
+StarPatrol.Ufo.prototype.update = function () {
     var targetAngle = this.game.math.angleBetween(
         this.x, this.y,
         this.target.x, this.target.y
@@ -89,7 +88,7 @@ Ufo.prototype.update = function () {
 
     // ATTACK
     if (this.isAttacking) {
-        // Magnet speeds up
+        // Ufo speeds up
         if (this.speed < this.MAXVELOCITY) {
             this.speed += this.MAXTHRUST;
         }
@@ -151,7 +150,7 @@ Ufo.prototype.update = function () {
         }
 
         // Fire death ray
-        if (this.deathRayCharge >= this.DEATHRAY_DISCHARGE && distance < this.MAXCANNONDISTANCE && this.rotation == targetAngle) {
+        if (this.deathRayCharge >= this.DEATHRAY_DISCHARGE && distance < this.MAXCANNONDISTANCE && this.rotation === targetAngle) {
             this.fireDeathRay();
         }
 
@@ -188,7 +187,7 @@ Ufo.prototype.update = function () {
 };
 
 
-Ufo.prototype.catchTarget = function (bullet) {
+StarPatrol.Ufo.prototype.catchTarget = function (bullet) {
     bullet.x = this.target.x;
     bullet.y = this.target.y;
     this.target.body.velocity.x = 0;
@@ -198,12 +197,12 @@ Ufo.prototype.catchTarget = function (bullet) {
     this.fartSound.play('', 0, 1.0, false, true);
 };
 
-Ufo.prototype.fireDeathRay = function () {
+StarPatrol.Ufo.prototype.fireDeathRay = function () {
     if (this.deathRayCharge >= this.DEATHRAY_DISCHARGE) {
         this.deathRayCharge -= this.DEATHRAY_DISCHARGE;
         var deathRay = this.deathrays.getFirstDead();
         if (!deathRay) {
-            deathRay = new DeathRay(this.game, this.DEATHRAY_SCALE, this.x, this.y, this.angle);
+            deathRay = new StarPatrol.DeathRay(this.game, this.DEATHRAY_SCALE, this.x, this.y, this.angle);
             this.deathrays.add(deathRay);
         }
         this.deathRaySound.play('', 0, 0.4, false, true);
@@ -212,7 +211,7 @@ Ufo.prototype.fireDeathRay = function () {
     }
 };
 
-Ufo.prototype.updateWeapons = function () {
+StarPatrol.Ufo.prototype.updateWeapons = function () {
     // Tar bullet
     this.tar = 1;
     if (this.hasBullets && this.alive) {
@@ -222,7 +221,7 @@ Ufo.prototype.updateWeapons = function () {
                 if (this.game.physics.arcade.distanceBetween(bullet, this.target) > this.BULLETLOCKDISTANCE) {
                     this.game.physics.arcade.accelerateToObject(bullet, this.target, this.BULLETACCELERATION, this.MAXBULLETSPEED, this.MAXBULLETSPEED);
                 } else {
-                    this.game.physics.arcade.moveToObject(bullet, this.target, parseInt(this.target.body.speed) * 10);
+                    this.game.physics.arcade.moveToObject(bullet, this.target, parseInt(this.target.body.speed, 10) * 10);
                 }
                 if (bullet.lifespan < this.game.time.now) {
                     bullet.kill();
@@ -231,4 +230,3 @@ Ufo.prototype.updateWeapons = function () {
         }, this, true);
     }
 };
-

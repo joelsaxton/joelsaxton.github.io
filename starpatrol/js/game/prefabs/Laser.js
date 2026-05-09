@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/9/14.
  */
 
-var Laser = function(game, laserScale, x, y, angle, key, frame){
+StarPatrol.Laser = function(game, laserScale, x, y, angle, key, frame){
     key = 'laser';
     Phaser.Sprite.call(this, game, x, y, key, frame);
 
@@ -20,10 +20,10 @@ var Laser = function(game, laserScale, x, y, angle, key, frame){
     this.charge = 50;
 };
 
-Laser.prototype = Object.create(Phaser.Sprite.prototype);
-Laser.prototype.constructor = Laser;
+StarPatrol.Laser.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Laser.prototype.constructor = StarPatrol.Laser;
 
-Laser.prototype.onRevived = function() {
+StarPatrol.Laser.prototype.onRevived = function() {
     this.lifespan = this.game.time.now + this.laserLifeSpan;
     this.body.velocity.x = Math.cos(this.rotation) * this.speed;
     this.body.velocity.y = Math.sin(this.rotation) * this.speed;

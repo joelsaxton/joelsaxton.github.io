@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/10/14.
  */
 
-var Sputnik = function(main, player, scale, x, y, key, frame){
+StarPatrol.Sputnik = function(main, player, scale, x, y, key, frame){
     key = 'sputnik';
     Phaser.Sprite.call(this, main.game, x, y, key, frame);
 
@@ -58,19 +58,19 @@ var Sputnik = function(main, player, scale, x, y, key, frame){
 
 };
 
-Sputnik.prototype = Object.create(Phaser.Sprite.prototype);
-Sputnik.prototype.updateWeapons = Alien.prototype.updateWeapons;
-Sputnik.prototype.avoidObstacle = Alien.prototype.avoidObstacle;
-Sputnik.prototype.constructor = Sputnik;
+StarPatrol.Sputnik.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Sputnik.prototype.updateWeapons = StarPatrol.Alien.prototype.updateWeapons;
+StarPatrol.Sputnik.prototype.avoidObstacle = StarPatrol.Alien.prototype.avoidObstacle;
+StarPatrol.Sputnik.prototype.constructor = StarPatrol.Sputnik;
 
-Sputnik.prototype.onRevived = function() {
+StarPatrol.Sputnik.prototype.onRevived = function() {
     this.animations.play('cruise', 20, true);
     this.charge = this.MAXCHARGE;
     this.health = this.MAXHEALTH;
     this.alive = true;
 };
 
-Sputnik.prototype.update = function() {
+StarPatrol.Sputnik.prototype.update = function() {
     var targetAngle = this.game.math.angleBetween(
         this.x, this.y,
         this.target.x, this.target.y
@@ -160,9 +160,9 @@ Sputnik.prototype.update = function() {
     }
 };
 
-Sputnik.prototype.commitSuicide = function()
+StarPatrol.Sputnik.prototype.commitSuicide = function()
 {
-    if (this.alive == true) {
+    if (this.alive === true) {
         var distance = this.game.physics.arcade.distanceBetween(this, this.target);
         var modifier = Math.abs(this.MAX_SUICIDE_DISTANCE - distance) / this.MAX_SUICIDE_DISTANCE;
         this.target.health -= this.WEAPON_DAMAGE * modifier;
@@ -170,7 +170,7 @@ Sputnik.prototype.commitSuicide = function()
     }
 };
 
-Sputnik.prototype.die = function()
+StarPatrol.Sputnik.prototype.die = function()
 {
     this.alive = false;
     this.suicideSound.stop();

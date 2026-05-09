@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/9/14.
  */
 
-var DeathRay = function(game, laserScale, x, y, angle, key, frame){
+StarPatrol.DeathRay = function(game, laserScale, x, y, angle, key, frame){
     key = 'deathray';
     Phaser.Sprite.call(this, game, x, y, key, frame);
 
@@ -19,10 +19,10 @@ var DeathRay = function(game, laserScale, x, y, angle, key, frame){
     this.damage = 100;
 };
 
-DeathRay.prototype = Object.create(Phaser.Sprite.prototype);
-DeathRay.prototype.constructor = DeathRay;
+StarPatrol.DeathRay.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.DeathRay.prototype.constructor = StarPatrol.DeathRay;
 
-DeathRay.prototype.onRevived = function() {
+StarPatrol.DeathRay.prototype.onRevived = function() {
     this.lifespan = this.game.time.now + this.laserLifeSpan;
     this.body.velocity.x = Math.cos(this.rotation) * this.speed;
     this.body.velocity.y = Math.sin(this.rotation) * this.speed;

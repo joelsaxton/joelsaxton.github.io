@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/9/14.
  */
 
-var Bullet = function(game, ship, x, y, key, frame){
+StarPatrol.Bullet = function(game, ship, x, y, key, frame){
 
     var key, bulletScale;
 
@@ -39,10 +39,10 @@ var Bullet = function(game, ship, x, y, key, frame){
     this.events.onRevived.add(this.onRevived, this);
 };
 
-Bullet.prototype = Object.create(Phaser.Sprite.prototype);
-Bullet.prototype.constructor = Bullet;
+StarPatrol.Bullet.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Bullet.prototype.constructor = StarPatrol.Bullet;
 
-Bullet.prototype.onRevived = function() {
+StarPatrol.Bullet.prototype.onRevived = function() {
     this.lifespan = this.game.time.now + this.bulletLifeSpan;
     this.animations.play('bullet', 20, true);
     this.game.add.tween(this.scale).to({ x: this.scale.x * 1.1, y: this.scale.y * 1.1}, 500, Phaser.Easing.Elastic.None).loop().start();

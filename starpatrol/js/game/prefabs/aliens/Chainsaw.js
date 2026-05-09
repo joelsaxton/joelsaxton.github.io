@@ -2,7 +2,7 @@
  * Created by joelsaxton on 11/10/14.
  */
 
-var Chainsaw = function (main, player, scale, x, y, key, frame) {
+StarPatrol.Chainsaw = function (main, player, scale, x, y, key, frame) {
     key = 'chainsaw';
 
     Phaser.Sprite.call(this, main.game, x, y, key, frame);
@@ -88,13 +88,12 @@ var Chainsaw = function (main, player, scale, x, y, key, frame) {
 
 };
 
-Chainsaw.prototype = Object.create(Phaser.Sprite.prototype);
-Chainsaw.prototype.constructor = Chainsaw;
-Chainsaw.prototype.avoidObstacle = Alien.prototype.avoidObstacle;
-Chainsaw.prototype.die = Alien.prototype.die;
-Chainsaw.prototype.onRevived = Alien.prototype.onRevived;
+StarPatrol.Chainsaw.prototype = Object.create(Phaser.Sprite.prototype);
+StarPatrol.Chainsaw.prototype.constructor = StarPatrol.Chainsaw;
+StarPatrol.Chainsaw.prototype.avoidObstacle = StarPatrol.Alien.prototype.avoidObstacle;
+StarPatrol.Chainsaw.prototype.onRevived = StarPatrol.Alien.prototype.onRevived;
 
-Chainsaw.prototype.updateWeapons = function() {
+StarPatrol.Chainsaw.prototype.updateWeapons = function() {
     // Attack with drill if close enough
     if (this.alive) {
         var distance = this.game.physics.arcade.distanceBetween(this, this.target);
@@ -107,9 +106,9 @@ Chainsaw.prototype.updateWeapons = function() {
             explosionAnimation.play('explosion', 500, false, true);
         }
     }
-}
+};
 
-Chainsaw.prototype.update = function () {
+StarPatrol.Chainsaw.prototype.update = function () {
 
     this.smokeEmitter.x = this.x;
     this.smokeEmitter.y = this.y;
@@ -193,7 +192,7 @@ Chainsaw.prototype.update = function () {
     }
 };
 
-Chainsaw.prototype.getRetreatTarget = function () {
+StarPatrol.Chainsaw.prototype.getRetreatTarget = function () {
     var x = this.player.x;
     var y = this.player.y;
     var x_vel = this.player.body.velocity.x;
@@ -211,11 +210,10 @@ Chainsaw.prototype.getRetreatTarget = function () {
     if (this.retreatTarget.y > this.GAMESIZE) this.retreatTarget.y = this.GAMESIZE;
 };
 
-Chainsaw.prototype.die = function () {
+StarPatrol.Chainsaw.prototype.die = function () {
     this.alive = false;
     this.smokeEmitter.on = false;
     this.chainsawOn.stop();
     this.chainsawIdle.stop();
     this.chainsawAttack.stop();
 };
-
