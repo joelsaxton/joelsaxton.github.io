@@ -38,7 +38,6 @@
         }
     };
 
-    let newSystem = null;
 
     window.onload = function () {
         const selectedSystem = document.getElementById('choose-system');
@@ -60,13 +59,9 @@
         const index = selected.options[selected.selectedIndex].value;
 
         if (index !== 'Random') {
-            newSystem = null; // reset so next Random pick generates a fresh system
             buildExistingSolarSystem(systems[index], container);
         } else {
-            if (!newSystem) {
-                newSystem = buildNewSolarSystem(minBodies, maxBodies, maxBodySize, minBodySize, minStarSize, orbitIntervalMin, orbitIntervalMax);
-            }
-            buildExistingSolarSystem(newSystem, container);
+            buildExistingSolarSystem(buildNewSolarSystem(minBodies, maxBodies, maxBodySize, minBodySize, minStarSize, orbitIntervalMin, orbitIntervalMax), container);
         }
     }
 
