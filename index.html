@@ -29,10 +29,41 @@
     <div id="solar-system"></div>
         <div id="display">
             <select id="choose-system">
-                <option class="system-option" name="Sol" value="Sol" selected="selected">SOL</option>
-                <option class="system-option" name="HD-10180" value="HD-10180">HD-10180</option>
-                <option class="system-option" name="Gliese-581" value="Gliese-581">Gliese-581</option>
-                <option class="system-option" name="Random" value="Random">Build Random</option>
+                <option class="system-option" value="Sol" selected="selected">SOL</option>
+                <option class="system-option" value="HD-10180">HD-10180</option>
+                <option class="system-option" value="Gliese-581">Gliese-581</option>
+                <option class="system-option" value="TRAPPIST-1">TRAPPIST-1</option>
+                <option class="system-option" value="HR-8799">HR 8799</option>
+                <option class="system-option" value="Kepler-90">Kepler-90</option>
+                <option class="system-option" value="55-Cancri">55 Cancri A</option>
+                <option class="system-option" value="Upsilon-Andromedae">υ Andromedae</option>
+                <option class="system-option" value="Random">Build Random</option>
+                <option class="system-option" value="Custom">Custom System</option>
+            </select>
+        </div>
+        <div id="custom-controls" style="display:none">
+            <label for="planet-count">Planets</label>
+            <select id="planet-count">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" selected="selected">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <label for="star-type">Star Type</label>
+            <select id="star-type">
+                <option value="red-dwarf">Red Dwarf</option>
+                <option value="orange-dwarf">Orange Dwarf</option>
+                <option value="yellow-dwarf" selected="selected">Yellow Dwarf</option>
+                <option value="yellow-white">Yellow-White</option>
+                <option value="white">White Star</option>
+                <option value="blue-giant">Blue Giant</option>
+                <option value="blue-supergiant">Blue Supergiant</option>
             </select>
         </div>
     <div id="controls">
