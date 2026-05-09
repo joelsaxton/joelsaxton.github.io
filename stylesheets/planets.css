@@ -20,19 +20,25 @@ html, body {
     width: 100%;
 }
 
-#display {
-    position:absolute;
+#ui-panel {
+    position: absolute;
     top: 4px;
     left: 10px;
-    color:white;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#display {
+    color: white;
     text-align: center;
     font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
 }
 
-#controls {
-    top: 7px;
-    left: 120px;
-    position:absolute;
+#controls label,
+#custom-controls label {
+    font-size: 0.6rem;
 }
 
 #slider, #zoom-slider {

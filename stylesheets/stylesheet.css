@@ -43,6 +43,8 @@ header {
   width: 100%;
   padding: 20px 0;
   margin: 0 0 40px 0;
+  position: relative;
+  z-index: 1001;
 }
 
 header h1 {
