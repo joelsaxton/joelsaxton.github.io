@@ -255,8 +255,9 @@
         container.appendChild(star);
 
         for (let i = 1; i < names.length; i++) {
-            const orbit = orbitSizes[i] * orbitModifier;
+            const rawOrbit = orbitSizes[i] * orbitModifier;
             const planetSize = (bodySizes[i] * max) / sizeFactor;
+            const orbit = Math.max(rawOrbit, sunSize + planetSize + 10);
             const outer = document.createElement('div');
             outer.className = 'orbit';
             outer.style.width = outer.style.height = orbit + sunSize + 'px';
