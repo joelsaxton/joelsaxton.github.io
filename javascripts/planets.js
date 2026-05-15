@@ -257,7 +257,7 @@
         for (let i = 1; i < names.length; i++) {
             const rawOrbit = orbitSizes[i] * orbitModifier;
             const planetSize = (bodySizes[i] * max) / sizeFactor;
-            const orbit = Math.max(rawOrbit, sunSize + planetSize + 10);
+            const orbit = Math.max(rawOrbit, planetSize + 2);
             const outer = document.createElement('div');
             outer.className = 'orbit';
             outer.style.width = outer.style.height = orbit + sunSize + 'px';
@@ -277,7 +277,8 @@
 
     function setSliderCommands(slider, zoomSlider) {
         slider.addEventListener('change', function () {
-            secondsPerYear = 1 / this.value;
+            const t = (this.value - 1) / 99;
+            secondsPerYear = 10000 * Math.pow(0.00005, t);
             buildSolarSystem();
         });
 

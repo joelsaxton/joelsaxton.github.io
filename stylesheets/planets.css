@@ -44,7 +44,20 @@ html, body {
 #slider, #zoom-slider {
     border-radius: 2px;
     height: 5px;
-    width:50px;
+}
+
+#slider {
+    width: 100px;
+}
+
+#zoom-slider {
+    width: 100px;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .system-option, #choose-system{
